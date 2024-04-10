@@ -1,4 +1,6 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const apiRoutes = require("./routes/index.js");
 
 const app = express();
 
@@ -9,6 +11,9 @@ app.get("/", (req, res) => {
 });
 
 const prepareAndStartServer = () => {
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use("/api", apiRoutes);
   app.listen(3000, () => {
     console.log("server started");
   });
